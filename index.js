@@ -2,14 +2,23 @@
 var blob = "";
 var word = "";
 
+// display the encrypted text.
 var input = document.querySelector("#input");
+// display the decrypted text.
+var output = document.querySelector("#decoded");
+// button to display decrypted text.
+var decoder = document.querySelector("#decoder");
+// button to hide the text after.
+var hide = document.querySelector("#hide");
 
-// Listen to any, "keypress" event.
+// Event Listeners.
+
+hide.addEventListener("click", hideText);
+
+decoder.addEventListener("click", decode);
+
+// Listen to any, "keypress" event in the window.
 addEventListener('keypress', function(event) {
-
-	// console.log(event);
-
-	// console.log(event.key + " " + event.key+1)
 
 	// if the key pressed is a, "space character" start a new word.
 	if (event.code == "Space") {
@@ -20,22 +29,28 @@ addEventListener('keypress', function(event) {
 		word += String.fromCharCode(event.charCode+1);
 	}
 
-	if (event.keyCode == 8) { console.log("back"); }
-
+	// display text on the webpage.
 	input.innerText = blob;
-	// console.log(blob);
 
 });
+
+function decode() {
+	var newStr = "";
+	for (var i = 0; i <= blob.length - 1; i++) {
+		if (blob[i] == " ") {
+			newStr += " ";
+		} else {
+			newStr += String.fromCharCode(blob.charCodeAt(i)-1);
+		}
+	}
+	output.innerText = newStr;
+}
+
+function hideText() {
+	output.hidden = true;
+}
 
 // sets the variables, 'word' to the empty string.
 function reset() {
 	word = " ";
-}
-
-
-function decode(str) {
-	var newStr = "";
-	for (var i = 0; i <= str.length - 1; i++) {
-		newStr += parseInt(str[i]) - 1;
-	}
 }
