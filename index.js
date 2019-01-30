@@ -23,24 +23,23 @@ addEventListener('keypress', function(event) {
 	// if the key pressed is a, "space character" start a new word.
 	if (event.code == "Space") {
 		word += " ";
-		blob += word;
-		reset();
 	} else {
 		word += String.fromCharCode(event.charCode+1);
 	}
 
 	// display text on the webpage.
-	input.innerText = blob;
+	input.innerText = word;
 
 });
 
 function decode() {
 	var newStr = "";
-	for (var i = 0; i <= blob.length - 1; i++) {
-		if (blob[i] == " ") {
+	output.hidden = false;
+	for (var i = 0; i <= word.length - 1; i++) {
+		if (word[i] == " ") {
 			newStr += " ";
 		} else {
-			newStr += String.fromCharCode(blob.charCodeAt(i)-1);
+			newStr += String.fromCharCode(word.charCodeAt(i)-1);
 		}
 	}
 	output.innerText = newStr;
@@ -48,9 +47,4 @@ function decode() {
 
 function hideText() {
 	output.hidden = true;
-}
-
-// sets the variables, 'word' to the empty string.
-function reset() {
-	word = " ";
 }
